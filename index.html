@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>육아휴직 급여 계산기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    label, input {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    input[type="number"] {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>육아휴직 급여 계산기</h2>
+    <label for="salary">육아휴직 전 평균 월급여 (원)</label>
+    <input type="number" id="salary" placeholder="예: 2500000" />
+    <button onclick="calculateSalary()">급여 계산하기</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateSalary() {
+      const salary = parseInt(document.getElementById('salary').value);
+      if (!salary || salary <= 0) {
+        document.getElementById('result').innerText = "올바른 월급여를 입력해주세요.";
+        return;
+      }
+
+      let calculated = salary * 0.8;
+      if (calculated > 1500000) calculated = 1500000;
+      if (calculated < 700000) calculated = 700000;
+
+      document.getElementById('result').innerText =
+        `월 ${calculated.toLocaleString()}원, 12개월 총 ${
+          (calculated * 12).toLocaleString()
+        }원 지급 예상됩니다.`;
+    }
+  </script>
+</body>
+</html>
